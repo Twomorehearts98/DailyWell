@@ -1,0 +1,129 @@
+<!-- home.html -->
+
+<!-- DailyWell - 건강 및 기분 기록 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyWell - 건강 및 기분 기록</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>DailyWell</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html" id="homeBtn">홈</a></li>
+                <li><a href="#" id="recordBtn">기록하기</a></li>
+                <li><a href="graph.html">그래프</a></li>
+                <li><a href="#">설정</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="calendar-container">
+            <div class="calendar-header">
+                <div id="prevMonth" class="nav-button">◀</div>
+                <h2 id="currentMonthYear"></h2>
+                <div id="nextMonth" class="nav-button">▶</div>
+            </div>
+            <table id="calendarTable" class="calendar"></table>
+        </section>
+        
+    </main>
+    <div id="recordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">오늘의 기록</h2>
+    
+            <!-- 오늘의 기분 -->
+            <label for="mood">오늘의 기분: </label>
+            <select id="mood">
+                <option value="1">1점</option>
+                <option value="2">2점</option>
+                <option value="3">3점</option>
+                <option value="4">4점</option>
+                <option value="5">5점</option>
+            </select>
+    
+            <!-- 몸무게 입력 -->
+            <div class="form-group">
+                <label for="weight">오늘 몸무게:</label>
+                <input type="text" id="weight" placeholder="kg">
+            </div>
+    
+            <!-- 음식 입력 -->
+            <div class="form-group">
+                <label for="foodName">오늘 먹은 음식:</label>
+                <input type="text" id="foodName" placeholder="음식 이름">
+            </div>
+    
+            <!-- 음식 사진 업로드 -->
+            <div class="form-group">
+                <label for="foodImage">음식 사진 업로드:</label>
+                <input type="file" id="foodImage">
+            </div>
+    
+            <!-- 기록하기 버튼 -->
+            <button id="saveRecordBtn">기록하기</button>
+        </div>
+    </div>
+    
+
+
+    <footer>
+        <p>&copy; 2023 DailyWell. All rights reserved.</p>
+    </footer>
+
+    <!-- 자바스크립트 파일 로드 -->
+    <script src="calendar.js"></script>
+    <script src="chart.js"></script>
+    <script src="graph.js"></script> <!-- graph.js 파일 로드 추가 -->
+    <script src="record.js"></script>
+    <script>
+        function closeModal() {
+            document.getElementById('recordModal').style.display = 'none';
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('recordBtn').addEventListener('click', function () {
+                openRecordModal();
+            });
+
+            function saveRecord() {
+                
+                const currentDate = getCurrentDate();
+                const mood = document.getElementById('mood').value;
+                const weight = document.getElementById('weight').value;
+                const foodName = document.getElementById('foodName').value;
+                const foodImage = document.getElementById('foodImage').value;
+                
+                const record = {
+                    date: currentDate,
+                    mood: mood,
+                    weight: weight,
+                    foodName: foodName,
+                    foodImage: foodImage
+                };
+                
+                saveRecordToLocalStorage(record);
+                closeModal();
+            }
+
+            document.getElementById('saveRecordBtn').addEventListener('click', function () {
+                saveRecord();
+            });
+        });
+
+        function getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+        }
+    </script>
+</body>
+</html>
