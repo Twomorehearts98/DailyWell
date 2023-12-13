@@ -1,36 +1,66 @@
 // record.js
+
 document.addEventListener('DOMContentLoaded', function () {
-    const today = new Date().toLocaleDateString();
-    
-    // 기록한 정보를 저장하는 함수
-    function saveRecordToLocalStorage(record) {
-        // 이전에 저장된 정보가 있다면 불러옴
-        const existingRecords = JSON.parse(localStorage.getItem('dailyWellRecords')) || [];
+    // 기록하기 버튼에 이벤트 리스너 추가
+    document.getElementById('recordBtn').addEventListener('click', function () {
+        openRecordModal();
+    });
 
-        // 새로운 기록을 추가
-        existingRecords.push(record);
-
-        // 로컬 스토리지에 저장
-        localStorage.setItem('dailyWellRecords', JSON.stringify(existingRecords));
-
-        // 해당 날짜의 정보도 따로 저장
-        localStorage.setItem(`dailyWellRecord_${record.date}`, JSON.stringify(record));
+    // 모달 창 닫기 함수
+    function closeModal() {
+        document.getElementById('recordModal').style.display = 'none';
     }
 
-    // 저장된 정보를 불러오는 함수
-    function getRecordsFromLocalStorage() {
-        // 로컬 스토리지에서 정보를 가져옴
-        const storedRecords = JSON.parse(localStorage.getItem('dailyWellRecords')) || [];
-
-        return storedRecords;
+    // 모달 열기 함수
+    function openRecordModal() {
+        document.getElementById('recordModal').style.display = 'block';
     }
 
-    // 기록한 정보를 저장
-    const record = {
-        date: today,
-        mood: 4, // 사용자가 선택한 기분 점수
-        // 다른 정보도 추가 가능
-    };
+    // 모달 닫기 버튼 이벤트 리스너 추가
+    document.getElementById('modalCloseBtn').addEventListener('click', function () {
+        closeModal();
+    });
 
-    saveRecordToLocalStorage(record);
+    // 기록하기 버튼 클릭 시 처리 함수
+    function saveRecord() {
+        const currentDate = getCurrentDate();
+
+        // 사용자가 입력한 데이터 수집
+        const mood = document.getElementById('mood').value;
+        const weight = document.getElementById('weight').value;
+        const foodName = document.getElementById('foodName').value;
+        const foodImage = document.getElementById('foodImage').value;
+
+        // 기록 객체 생성
+        const record = {
+            date: currentDate,
+            mood: mood,
+            weight: weight,
+            foodName: foodName,
+            foodImage: foodImage
+        };
+
+        // 저장 함수 호출
+        saveRecordToLocalStorage(record);
+
+        // 모달 창 닫기
+        closeModal();
+    }
+
+    // 기록 버튼 클릭 시 saveRecord 함수 호출
+    document.getElementById('saveRecordBtn').addEventListener('click', function () {
+        saveRecord();
+    });
+
+    // 현재 날짜 가져오는 함수
+    function getCurrentDate() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+        return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+    }
 });
+
+// Add this line to initialize the modal when the DOM is loaded
+document.addEventListener('DOMContentLoaded', openRecordModal);

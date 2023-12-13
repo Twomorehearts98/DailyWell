@@ -16,9 +16,7 @@ function renderGraphs() {
     const data = loadData(); // 데이터를 로드하는 함수 (loadData 함수는 실제 데이터를 어떻게 가져올지에 따라 구현해야 함)
 
     // 기분 점수 그래프 초기화
-    const moodChartCanvas = document.createElement('canvas');
-    moodChartCanvas.id = 'moodChart';
-    document.getElementById('main').appendChild(moodChartCanvas);
+    const moodChartCanvas = document.getElementById('moodChart');
     const moodChart = new Chart(moodChartCanvas, {
         type: 'line',
         data: {
@@ -43,9 +41,7 @@ function renderGraphs() {
     });
 
     // 몸무게 그래프 초기화
-    const weightChartCanvas = document.createElement('canvas');
-    weightChartCanvas.id = 'weightChart';
-    document.getElementById('main').appendChild(weightChartCanvas);
+    const weightChartCanvas = document.getElementById('weightChart');
     const weightChart = new Chart(weightChartCanvas, {
         type: 'line',
         data: {
@@ -76,7 +72,12 @@ function loadData() {
         weight: [70, 69, 68, 68, 67, 66, 65] // 예시 데이터 (몸무게)
     };
 }
-document.addEventListener('DOMContentLoaded', function () {
-    // 그래프를 그리는 코드 작성
-    renderGraphs();
-});
+
+function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+}
+

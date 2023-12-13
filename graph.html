@@ -40,48 +40,44 @@
     </footer>
 
     <!-- 그래프를 그리기 위한 자바스크립트 파일 로드 -->
-    <script src="calendar.js"></script>
-    <script src="chart.js"></script>
-    <script src="graph.js"></script> <!-- graph.js 파일 로드 추가 -->
-    <script src="record.js"></script>
-    <script src="calendar.js"></script>
     <script src="chart.js"></script>
     <script src="record.js"></script>
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 홈 버튼에 이벤트 리스너 추가
-            document.getElementById('homeBtn').addEventListener('click', function () {
-                // 홈 버튼을 누르면 메인 페이지로 이동
-                window.location.href = 'home.html'; // 메인 페이지의 파일명으로 수정해주세요.
-            });
-    
-            // 기록하기 버튼에 이벤트 리스너 추가
-            document.getElementById('recordBtn').addEventListener('click', function () {
-                // 기록하기 버튼을 누르면 모달 팝업 열기
-                openRecordModal();
-            });
-    
-            // 그래프 버튼에 이벤트 리스너 추가
-            document.getElementById('graphBtn').addEventListener('click', function () {
-                // 그래프 버튼을 누르면 그래프 페이지로 이동
-                window.location.href = 'graph.html';
-            });
-        });
-    
-        // 모달 창 닫기 함수
+    <script src="graph.js"></script> 
+    <script src="calendar.js"></script>
+    <script>
         function closeModal() {
             document.getElementById('recordModal').style.display = 'none';
         }
-    
-        // 기록하기 버튼 클릭 시 처리 함수
-        function saveRecord() {
-            // TODO: 입력된 데이터 처리 및 저장 로직 추가
-            alert('기록이 저장되었습니다.');
-            // 모달 창 닫기
-            closeModal();
-        }
-    
-        // 현재 날짜 가져오는 함수
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('recordBtn').addEventListener('click', function () {
+                openRecordModal();
+            });
+
+            function saveRecord() {
+                const currentDate = getCurrentDate();
+                const mood = document.getElementById('mood').value;
+                const weight = document.getElementById('weight').value;
+                const foodName = document.getElementById('foodName').value;
+                const foodImage = document.getElementById('foodImage').value;
+                
+                const record = {
+                    date: currentDate,
+                    mood: mood,
+                    weight: weight,
+                    foodName: foodName,
+                    foodImage: foodImage
+                };
+                
+                saveRecordToLocalStorage(record);
+                closeModal();
+            }
+
+            document.getElementById('saveRecordBtn').addEventListener('click', function () {
+                saveRecord();
+            });
+        });
+
         function getCurrentDate() {
             const today = new Date();
             const year = today.getFullYear();
@@ -89,6 +85,6 @@
             const day = today.getDate();
             return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
         }
-</script>
+    </script>
 </body>
 </html>

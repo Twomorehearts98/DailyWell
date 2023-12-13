@@ -34,33 +34,32 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    f// openRecordModal 함수 수정
-// openRecordModal 함수 수정
-function openRecordModal(year, month, day) {
-    const currentDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+    // openRecordModal 함수 수정
+    function openRecordModal(year, month, day) {
+        const currentDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
 
-    // localStorage에서 해당 날짜의 정보를 불러옴
-    const recordString = localStorage.getItem(`dailyWellRecord_${currentDate}`);  // 수정된 부분
+        // localStorage에서 해당 날짜의 정보를 불러옴
+        const recordString = localStorage.getItem(`dailyWellRecord_${currentDate}`);
 
-    if (recordString) {
-        const record = JSON.parse(recordString);
+        if (recordString) {
+            const record = JSON.parse(recordString);
 
-        // 팝업 창에 정보 표시
-        document.getElementById('modalTitle').textContent = `오늘의 기록 - ${currentDate}`;
-        document.getElementById('mood').value = record.mood || '';
-        document.getElementById('weight').value = record.weight || '';
-        document.getElementById('foodName').value = record.foodName || '';
-        document.getElementById('foodImage').value = record.foodImage || '';
-        document.getElementById('recordModal').style.display = 'block';
-    } else {
-        alert('해당 날짜의 기록이 없습니다.');
+            // 팝업 창에 정보 표시
+            document.getElementById('modalTitle').textContent = `오늘의 기록 - ${currentDate}`;
+            document.getElementById('mood').value = record.mood || '';
+            document.getElementById('weight').value = record.weight || '';
+            document.getElementById('foodName').value = record.foodName || '';
+            document.getElementById('foodImage').value = record.foodImage || '';
+            document.getElementById('recordModal').style.display = 'block';
+        } else {
+            alert('해당 날짜의 기록이 없습니다.');
+        }
     }
-}
-
 
     document.getElementById('recordBtn').addEventListener('click', function () {
         openRecordModal(); // openRecordModal 함수 호출
     });
+
     // 모달 창 닫기 함수
     function closeModal() {
         document.getElementById('recordModal').style.display = 'none';

@@ -5,6 +5,12 @@ function renderGraphs() {
 
     // 기분 점수 그래프 초기화
     const moodChartCanvas = document.getElementById('moodChart');
+    const existingChart = moodChartCanvas.chart;
+    
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    
     const moodChart = new Chart(moodChartCanvas, {
         type: 'line', // 라인 그래프로 변경
         data: {

@@ -100,7 +100,7 @@ main {
 #nextMonth {
     cursor: pointer;
 }
-.modal {
+#recordModal {
     display: none;
     position: fixed;
     top: 0;
