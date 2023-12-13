@@ -1,4 +1,4 @@
-<!-- home.html -->
+<!-- index.html -->
 
 <!-- DailyWell - 건강 및 기분 기록 -->
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
         <h1>DailyWell</h1>
         <nav>
             <ul>
-                <li><a href="home.html" id="homeBtn">홈</a></li>
+                <li><a href="index.html" id="homeBtn">홈</a></li>
                 <li><a href="#" id="recordBtn">기록하기</a></li>
                 <li><a href="graph.html">그래프</a></li>
                 <li><a href="#">설정</a></li>
@@ -78,52 +78,53 @@
         <p>&copy; 2023 DailyWell. All rights reserved.</p>
     </footer>
 
-    <!-- 자바스크립트 파일 로드 -->
-    <script src="calendar.js"></script>
-    <script src="chart.js"></script>
-    <script src="graph.js"></script> <!-- graph.js 파일 로드 추가 -->
-    <script src="record.js"></script>
-    <script>
-        function closeModal() {
-            document.getElementById('recordModal').style.display = 'none';
-        }
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('recordBtn').addEventListener('click', function () {
-                openRecordModal();
-            });
+<!-- 자바스크립트 파일 로드 -->
+<script src="calendar.js"></script>
+<script src="record.js"></script>
+<script src="chart.js"></script>
+<script src="graph.js"></script>
 
-            function saveRecord() {
-                
-                const currentDate = getCurrentDate();
-                const mood = document.getElementById('mood').value;
-                const weight = document.getElementById('weight').value;
-                const foodName = document.getElementById('foodName').value;
-                const foodImage = document.getElementById('foodImage').value;
-                
-                const record = {
-                    date: currentDate,
-                    mood: mood,
-                    weight: weight,
-                    foodName: foodName,
-                    foodImage: foodImage
-                };
-                
-                saveRecordToLocalStorage(record);
-                closeModal();
-            }
+<script>
+    function closeModal() {
+        document.getElementById('recordModal').style.display = 'none';
+    }
 
-            document.getElementById('saveRecordBtn').addEventListener('click', function () {
-                saveRecord();
-            });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('recordBtn').addEventListener('click', function () {
+            openRecordModal();
         });
 
-        function getCurrentDate() {
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = today.getMonth() + 1;
-            const day = today.getDate();
-            return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+        function saveRecord() {
+            const currentDate = getCurrentDate();
+            const mood = document.getElementById('mood').value;
+            const weight = document.getElementById('weight').value;
+            const foodName = document.getElementById('foodName').value;
+            const foodImage = document.getElementById('foodImage').value;
+
+            const record = {
+                date: currentDate,
+                mood: mood,
+                weight: weight,
+                foodName: foodName,
+                foodImage: foodImage
+            };
+
+            saveRecordToLocalStorage(record);
+            closeModal();
         }
-    </script>
+
+        document.getElementById('saveRecordBtn').addEventListener('click', function () {
+            saveRecord();
+        });
+    });
+
+    function getCurrentDate() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+        return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+    }
+</script>
 </body>
 </html>

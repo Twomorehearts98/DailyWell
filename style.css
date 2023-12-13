@@ -36,8 +36,7 @@ main {
 }
 
 .record-form,
-.graph,
-.calendar {
+.graph {
     margin-bottom: 30px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -60,7 +59,7 @@ main {
 
 #calendarTable th,
 #calendarTable td {
-    width: 14.28%; /* 100%를 7일로 나눈 크기로 설정합니다. */
+    width: 14.2857%; /* 100%를 7일로 나눈 크기로 설정합니다. */
     box-sizing: border-box; /* padding과 border를 포함한 전체 크기를 설정합니다. */
     border: 1px solid #ddd;
     padding: 10px;
@@ -80,9 +79,6 @@ main {
     background-color: #f5f5f5;
 }
 
-
-
-
 .calendar-container {
     display: flex;
     flex-direction: column;
@@ -96,9 +92,22 @@ main {
     width: 100%;
 }
 
+
+#currentMonthYear {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 #prevMonth,
 #nextMonth {
     cursor: pointer;
+    font-size: 18px;
+    margin: 0 10px;
+}
+
+#prevMonth:hover,
+#nextMonth:hover {
+    color: #4CAF50;
 }
 #recordModal {
     display: none;
