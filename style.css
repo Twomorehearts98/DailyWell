@@ -1,0 +1,146 @@
+/*style.css*/
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.record-form,
+.graph,
+.calendar {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+/* 캘린더 스타일 수정 */
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+#calendarTable {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 테이블의 너비를 고정합니다. */
+}
+
+#calendarTable th,
+#calendarTable td {
+    width: 14.28%; /* 100%를 7일로 나눈 크기로 설정합니다. */
+    box-sizing: border-box; /* padding과 border를 포함한 전체 크기를 설정합니다. */
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+#calendarTable th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#calendarTable td {
+    cursor: pointer;
+}
+
+#calendarTable td:hover {
+    background-color: #f5f5f5;
+}
+
+
+
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#prevMonth,
+#nextMonth {
+    cursor: pointer;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+.form-group {
+    margin-bottom: 15px;
+}

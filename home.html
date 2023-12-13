@@ -1,0 +1,131 @@
+<!-- home.html -->
+<!-- DailyWell - 건강 및 기분 기록 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyWell - 건강 및 기분 기록</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1>DailyWell</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html" id="homeBtn">홈</a></li>
+                <li><a href="#" id="recordBtn">기록하기</a></li>
+                <li><a href="graph.html">그래프</a></li>
+                <li><a href="#">설정</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="calendar-container">
+            <div class="calendar-header">
+                <div id="prevMonth" class="nav-button">◀</div>
+                <h2 id="currentMonthYear"></h2>
+                <div id="nextMonth" class="nav-button">▶</div>
+            </div>
+            <table id="calendarTable" class="calendar"></table>
+        </section>
+        
+    </main>
+    <!-- 모달 창 추가 -->
+<div id="recordModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle">오늘의 기록</h2>
+
+        <!-- 오늘의 기분 -->
+        <label for="mood">오늘의 기분: </label>
+        <select id="mood">
+            <option value="1">1점</option>
+            <option value="2">2점</option>
+            <option value="3">3점</option>
+            <option value="4">4점</option>
+            <option value="5">5점</option>
+        </select>
+
+        <!-- 몸무게 입력 -->
+        <div class="form-group">
+            <label for="weight">오늘 몸무게:</label>
+            <input type="text" id="weight" placeholder="kg">
+        </div>
+
+        <!-- 음식 입력 -->
+        <div class="form-group">
+            <label for="foodName">오늘 먹은 음식:</label>
+            <input type="text" id="foodName" placeholder="음식 이름">
+        </div>
+
+        <!-- 음식 사진 업로드 -->
+        <div class="form-group">
+            <label for="foodImage">음식 사진 업로드:</label>
+            <input type="file" id="foodImage">
+        </div>
+
+        <!-- 기록 버튼 -->
+        <button onclick="saveRecord()">기록하기</button>
+
+    </div>
+</div>
+
+
+    <footer>
+        <p>&copy; 2023 DailyWell. All rights reserved.</p>
+    </footer>
+
+    <!-- 자바스크립트 파일 로드 -->
+    <script src="calendar.js"></script>
+    <script src="chart.js"></script>
+    <script src="graph.js"></script> <!-- graph.js 파일 로드 추가 -->
+    <script src="record.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 홈 버튼에 이벤트 리스너 추가
+            document.getElementById('homeBtn').addEventListener('click', function () {
+                // 홈 버튼을 누르면 메인 페이지로 이동
+                window.location.href = 'home.html'; // 메인 페이지의 파일명으로 수정해주세요.
+            });
+    
+            // 기록하기 버튼에 이벤트 리스너 추가
+            document.getElementById('recordBtn').addEventListener('click', function () {
+                // 기록하기 버튼을 누르면 모달 팝업 열기
+                openRecordModal();
+            });
+    
+            // 그래프 버튼에 이벤트 리스너 추가
+            document.getElementById('graphBtn').addEventListener('click', function () {
+                // 그래프 버튼을 누르면 그래프 페이지로 이동
+                window.location.href = 'graph.html';
+            });
+        });
+    
+        // 모달 창 닫기 함수
+        function closeModal() {
+            document.getElementById('recordModal').style.display = 'none';
+        }
+    
+        // 기록하기 버튼 클릭 시 처리 함수
+        function saveRecord() {
+            // TODO: 입력된 데이터 처리 및 저장 로직 추가
+            alert('기록이 저장되었습니다.');
+            // 모달 창 닫기
+            closeModal();
+        }
+    
+        // 현재 날짜 가져오는 함수
+        function getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+        }
+    </script>
+</body>
+</html>
